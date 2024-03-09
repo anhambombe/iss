@@ -151,7 +151,7 @@ with tab1:
 	# Exibir o mapa no Streamlit usando st.components.v1.html()
 
 		with st.expander("🔎 Veja a tabela de dados aqui "):
-			st.write(df)
+			st.dataframe(df)
 	except:
 		st.write("Sem dados para exibir. Por favor, selecione pelo menos uma provincia")
 
