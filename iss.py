@@ -18,14 +18,9 @@ st.set_page_config(
 ## Ocultar menu e logo do streamlit
 hide_menu="""
 <style>
-#MainMenu {
-	visibility:hidden;
-}
-footer {
-	visibility: hidden;
-}
-
-
+#MainMenu {visibility:hidden;}
+footer {visibility: hidden;}
+header {visibility: hidden;}
 <style>
 
 """
