@@ -4,3 +4,4 @@ numpy
 folium
 openpyxl
 requests
+geopandas
