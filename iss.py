@@ -37,8 +37,8 @@ st.markdown(hide_menu,unsafe_allow_html=True)
 @st.cache_data
 def load_data():
 	url = "https://api.whonghub.org/api/v1/data/1129.csv"
-	username = iss_username
-	password = iss_password
+	username = st.secrets["iss_username"]
+	password = st.secrets["iss_password"]
 
 	response = requests.get(url, auth=(username, password))
 
