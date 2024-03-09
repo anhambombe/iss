@@ -102,7 +102,7 @@ folium.GeoJson(
         'fillColor': 'white',
         'color': 'black',
         'weight': 1,
-        'fillOpacity': 0.5
+        'fillOpacity': 0.2
     }
 ).add_to(m)
 
