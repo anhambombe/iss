@@ -77,7 +77,7 @@ def load_data():
 	return df
 @st.cache_data
 def load_shp():
-	shp = gpd.read_file(r"https://github.com/anhambombe/iss/blob/main/Distritos_161_j.json")
+	shp = gpd.read_file(r"https://raw.githubusercontent.com/anhambombe/iss/main/Distritos_161_j.json")
 	#https://github.com/anhambombe/iss/blob/main/Distritos_161_j.json
 
 	# Definir o CRS do GeoDataFrame
