@@ -91,6 +91,7 @@ bd=load_shp()
 latitude_mean = bd.geometry.centroid.y.mean()
 longitude_mean = bd.geometry.centroid.x.mean()
 
+#######################################################
 # Criar o mapa Folium
 m = folium.Map(location=[latitude_mean, longitude_mean], zoom_start=5)
 
@@ -102,9 +103,10 @@ folium.GeoJson(
         'fillColor': 'white',
         'color': 'black',
         'weight': 1,
-        'fillOpacity': 0.2
+        'fillOpacity': 0.1
     }
 ).add_to(m)
+###########################################################
 
 # Configuração da aplicação Streamlit
 st.title("Repositorio de dados de ISS")
@@ -127,8 +129,9 @@ with tab1:
 	with col1:
 		# Defina suas métricas
 		df['data'] = df['today'].dt.date
-		metrica1 = str(df["data"].max())
-		delta1="+++"
+		if prov:
+			metrica1 = str(df["data"].max())
+			delta1="+++"
 		# Obter a data e hora atual
 		hoje_hora = datetime.now()
 		# Extrair o mês atual
@@ -154,7 +157,8 @@ with tab1:
 	
 		# KPI 1
 		st.subheader('Actualização 📆')
-		st.metric(label="Data de envio do último formulario", value=metrica1, delta=delta1)
+		if prov:
+			st.metric(label="Data de envio do último formulario", value=metrica1, delta=delta1)
 
 	with col2:	
 		# KPI 2
