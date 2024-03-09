@@ -6,6 +6,7 @@ from folium.plugins import MarkerCluster
 import openpyxl
 import requests
 from datetime import datetime
+import geopandas as gpd
 
 
 st.set_page_config(
@@ -74,9 +75,35 @@ def load_data():
 
     
 	return df
+@st.cache_data
+def load_shp():
+	shp = gpd.read_file(r"C:\Users\LENOVO\Documents\Eu\WHO_2022\maps\Udated_SHP_2017\Distritos_161_j.json")
+
+	# Definir o CRS do GeoDataFrame
+	shp.crs = "EPSG:4201"
+	return shp
 
     #print (df)
 df=load_data()
+bd=load_shp()
+# Calcular o centroide do shapefile
+latitude_mean = bd.geometry.centroid.y.mean()
+longitude_mean = bd.geometry.centroid.x.mean()
+
+# Criar o mapa Folium
+m = folium.Map(location=[latitude_mean, longitude_mean], zoom_start=8)
+
+# Adicionar os dados do shapefile ao mapa Folium
+folium.GeoJson(
+    bd,
+    name='Distritos',
+    style_function=lambda feature: {
+        'fillColor': 'white',
+        'color': 'black',
+        'weight': 1,
+        'fillOpacity': 0.5
+    }
+).add_to(m)
 
 # Configuração da aplicação Streamlit
 st.title("Repositorio de dados de ISS")
@@ -180,7 +207,7 @@ with tab3:
 		
 		latitude_mean=df['_gps_beginning_latitude'].mean()
 		longitude_mean=df['_gps_beginning_longitude'].mean()
-		m = folium.Map(location=[latitude_mean, longitude_mean], zoom_start=5)
+		#m = folium.Map(location=[latitude_mean, longitude_mean], zoom_start=5)
 		for index, row in df[df["ano"]==2024].iterrows():
 		        folium.CircleMarker(
 		        location=[row['_gps_beginning_latitude'], row['_gps_beginning_longitude']],
