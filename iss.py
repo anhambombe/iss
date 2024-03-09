@@ -77,7 +77,8 @@ def load_data():
 	return df
 @st.cache_data
 def load_shp():
-	shp = gpd.read_file(r"C:\Users\LENOVO\Documents\Eu\WHO_2022\maps\Udated_SHP_2017\Distritos_161_j.json")
+	shp = gpd.read_file(r"https://github.com/anhambombe/iss/blob/main/Distritos_161_j.json")
+	https://github.com/anhambombe/iss/blob/main/Distritos_161_j.json
 
 	# Definir o CRS do GeoDataFrame
 	shp.crs = "EPSG:4201"
