@@ -263,7 +263,7 @@ with tab3:
 			tooltip="click me..." #tooltip
 			).add_to(m)
 
-			st.components.v1.html(m._repr_html_(), width=1200, height=600, scrolling=True)
+		st.components.v1.html(m._repr_html_(), width=1200, height=550, scrolling=True)
 	except:
 		st.write("Sem dados para exibir. Por favor, selecione pelo menos uma provincia")
 
