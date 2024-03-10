@@ -83,14 +83,16 @@ def load_shp():
 
 	# Definir o CRS do GeoDataFrame
 	shp.crs = "EPSG:4201"
+	# Calcular o centroide do shapefile
+	latitude_mean = bd.geometry.centroid.y.mean()
+	longitude_mean = bd.geometry.centroid.x.mean()
+	
 	return shp
 
     #print (df)
 df=load_data()
 bd=load_shp()
-# Calcular o centroide do shapefile
-latitude_mean = bd.geometry.centroid.y.mean()
-longitude_mean = bd.geometry.centroid.x.mean()
+
 
 #######################################################
 # Criar o mapa Folium
