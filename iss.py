@@ -221,7 +221,7 @@ with tab3:
 		).add_to(m)
 		######################### shp ##################################
 		popup = folium.GeoJsonPopup(
-			    fields=["states", "districts"],
+			    fields=[df["states"], df["districts"]],
 			    aliases=["Prov.", "Distr."],
 			    localize=True,
 			    labels=True,
@@ -256,9 +256,10 @@ with tab3:
 		        fill_opacity=1,
 		        #popup=row['districts'] 
 			popup=popup,
-			tooltip=tooltip
+			tooltip="click me..." #tooltip
 		    ).add_to(m)
-		st.components.v1.html(m._repr_html_(), width=800, height=600, scrolling=True)
+		folium.LayerControl().add_to(m)
+		st.components.v1.html(m._repr_html_(), width=1500, height=800, scrolling=True)
 	except:
 		st.write("Sem dados para exibir. Por favor, selecione pelo menos uma provincia")
 
