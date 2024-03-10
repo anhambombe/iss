@@ -110,11 +110,14 @@ folium.GeoJson(
     }
 ).add_to(m)
 ###########################################################
-
-# Configuração da aplicação Streamlit
-st.title("Repositorio de dados de ISS")
-tab1, tab2, tab3 = st.tabs(["📈 Listagem", "📊 Grafico","🌍 Mapa 🗺"])
-#tab1.subheader("Tables")
+with st.container():
+	# Configuração da aplicação Streamlit
+	st.title("Repositorio de dados de ISS")
+with st.container():
+	st.write("---")
+	
+	tab1, tab2, tab3 = st.tabs(["📈 Listagem", "📊 Grafico","🌍 Mapa 🗺"])
+	#tab1.subheader("Tables")
 
 prov=st.sidebar.multiselect(
     "Provincia",
@@ -178,7 +181,7 @@ with tab1:
 			# KPI 4
 			st.subheader(f'⌛Total Semana {semana_atual-1}')
 			st.metric(label=f"Semana {semana_atual-1}", value=metrica4, delta=delta4)
-	st.write("...")
+	st.write("---")
 	with st.container():
 		try:
 		# Exibir o mapa no Streamlit usando st.components.v1.html()
