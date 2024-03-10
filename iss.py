@@ -243,27 +243,27 @@ with tab3:
 				    sticky=False,
 				    labels=True,
 				    style="""
-				        background-color: #F0EFEF;
-				        border: 2px solid black;
-				        border-radius: 3px;
-				        box-shadow: 3px;
+					background-color: #F0EFEF;
+					border: 2px solid black;
+					border-radius: 3px;
+					box-shadow: 3px;
 				    """,
 				    max_width=800,
 				)
 			
-		        folium.CircleMarker(
-		        location=[row['_gps_beginning_latitude'], row['_gps_beginning_longitude']],
-		        radius=3,
-		        color="red",
-		        fill=True,
-		        fill_color="red",
-		        fill_opacity=1,
-		        #popup=row['districts'] 
+			folium.CircleMarker(
+			location=[row['_gps_beginning_latitude'], row['_gps_beginning_longitude']],
+			radius=3,
+			color="red",
+			fill=True,
+			fill_color="red",
+			fill_opacity=1,
+			#popup=row['districts'] 
 			popup=popup,
 			tooltip="click me..." #tooltip
-		    ).add_to(m)
+			).add_to(m)
 
-		st.components.v1.html(m._repr_html_(), width=1500, height=800, scrolling=True)
+			st.components.v1.html(m._repr_html_(), width=1200, height=600, scrolling=True)
 	except:
 		st.write("Sem dados para exibir. Por favor, selecione pelo menos uma provincia")
 
