@@ -228,7 +228,7 @@ with tab3:
 		#m = folium.Map(location=[latitude_mean, longitude_mean], zoom_start=5)
 		for index, row in df.iterrows():
 
-			popup_content = f"<b>Designaçao:</b> {row['desiganation']}<br>" \
+			popup_content = f"<b>Designaçao:</b> {row['designation']}<br>" \
 		                    f"<b>Nome:</b> {row['nome']}<br>" \
 		                    f"<b>Provincia:</b> {row['states']}<br>" \
 		                    f"<b>Distrito:</b> {row['districts']}<br>" \
@@ -236,7 +236,7 @@ with tab3:
 		                    f"<b>Semana:</b> {row['week']}"
 				
 			
-			tooltip_content = f"<b>Designaçao:</b> {row['desiganation']}<br>" \
+			tooltip_content = f"<b>Designaçao:</b> {row['designation']}<br>" \
 		                    f"<b>Nome:</b> {row['nome']}<br>" \
 		                    f"<b>Provincia:</b> {row['states']}<br>" \
 		                    f"<b>Distrito:</b> {row['districts']}<br>" \
