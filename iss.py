@@ -127,7 +127,7 @@ anos=st.sidebar.multiselect(
 df=df.loc[(df["states"].isin(prov)) & (df["ano"].isin(anos))]
 
 with tab1:
-	with st.conteiner:
+	with st.conteiner():
 		col1, col2, col3, col4 = st.columns([.25, .25, .25, .25])
 	
 		with col1:
@@ -179,7 +179,7 @@ with tab1:
 			st.subheader(f'⌛Total Semana {semana_atual-1}')
 			st.metric(label=f"Semana {semana_atual-1}", value=metrica4, delta=delta4)
 	st.write("...")
-	with st.conteiner:
+	with st.conteiner():
 		try:
 		# Exibir o mapa no Streamlit usando st.components.v1.html()
 	
