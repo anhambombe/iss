@@ -221,7 +221,7 @@ with tab3:
 		).add_to(m)
 		######################### shp ##################################
 		popup = folium.GeoJsonPopup(
-			    fields=["Provincia", "Distritos"],
+			    fields=["states", "districts"],
 			    aliases=["Prov.", "Distr."],
 			    localize=True,
 			    labels=True,
@@ -229,7 +229,7 @@ with tab3:
 			)
 			
 		tooltip = folium.GeoJsonTooltip(
-			    fields=["Provincia", "Distritos", "week"],
+			    fields=["states", "districts", "week"],
 			    aliases=["Prov.:", "Distr:", "Semana:"],
 			    localize=True,
 			    sticky=False,
