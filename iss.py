@@ -83,11 +83,7 @@ def load_shp():
 
 	# Definir o CRS do GeoDataFrame
 	shp.crs = "EPSG:4201"
-	# Calcular o centroide do shapefile
-	latitude_mean = shp.geometry.centroid.y.mean()
-	longitude_mean = shp.geometry.centroid.x.mean()
-	# Criar o mapa Folium
-	m = folium.Map(location=[latitude_mean, longitude_mean], zoom_start=5)
+
 	return shp
 
     #print (df)
@@ -96,7 +92,11 @@ bd=load_shp()
 
 
 #######################################################
-
+# Calcular o centroide do shapefile
+latitude_mean = bd.geometry.centroid.y.mean()
+longitude_mean = bd.geometry.centroid.x.mean()
+# Criar o mapa Folium
+m = folium.Map(location=[latitude_mean, longitude_mean], zoom_start=5)
 
 # Adicionar os dados do shapefile ao mapa Folium
 folium.GeoJson(
@@ -106,7 +106,7 @@ folium.GeoJson(
         'fillColor': 'white',
         'color': 'black',
         'weight': 1,
-        'fillOpacity': 0.1
+        'fillOpacity': 0.01
     }
 ).add_to(m)
 ###########################################################
@@ -127,63 +127,66 @@ anos=st.sidebar.multiselect(
 df=df.loc[(df["states"].isin(prov)) & (df["ano"].isin(anos))]
 
 with tab1:
-	col1, col2, col3, col4 = st.columns([.25, .25, .25, .25])
-
-	with col1:
-		# Defina suas métricas
-		df['data'] = df['today'].dt.date
-		if prov:
-			metrica1 = str(df["data"].max())
-			delta1="+++"
-		# Obter a data e hora atual
-		hoje_hora = datetime.now()
-		# Extrair o mês atual
-		ano_atual = hoje_hora.year
-		mes_atual = hoje_hora.month
-		nome_mes = hoje_hora.strftime('%B')
-		semana_atual = hoje_hora.isocalendar()[1]
-		metrica2 = len(df)
-		delta2=len(df[(df["ano"]==ano_atual) & (df["mes"]==mes_atual) ])-len(
-			df[(df["ano"]==ano_atual-1) & (df["mes"]==mes_atual) ])
-
-
-		
-		metrica3 = len(df[(df["ano"]==ano_atual) & (df["mes"]==mes_atual-1) ])
-		delta3=len(df[(df["ano"]==ano_atual) & (df["mes"]==mes_atual-1) ])-len(
-			df[(df["ano"]==ano_atual-1) & (df["mes"]==mes_atual-1) ])
-		metrica4 = len(df[(df["ano"]==ano_atual) & (df["week"]==semana_atual-1) ])
-		delta4=len(df[(df["ano"]==ano_atual) & (df["week"]==semana_atual-1) ])-len(
-		df[(df["ano"]==ano_atual-1) & (df["week"]==semana_atual-1) ])
-
-		# Layout do aplicativo
-		#st.title('KPI Dashboard')
+	with st.conteiner:
+		col1, col2, col3, col4 = st.columns([.25, .25, .25, .25])
 	
-		# KPI 1
-		st.subheader('Actualização 📆')
-		if prov:
-			st.metric(label="Data de envio do último formulario", value=metrica1, delta=delta1)
-
-	with col2:	
-		# KPI 2
-		st.subheader('Total ISS 🎨')
-		st.metric(label="Total formulários selecionados", value=metrica2, delta=delta2)
-
-	with col3:
-		# KPI 3
-		st.subheader('⏳Total Mês passado')
-		st.metric(label=f"Mês {mes_atual-1}", value=metrica3, delta=delta3)
-
-	with col4:
-		# KPI 4
-		st.subheader(f'⌛Total Semana {semana_atual-1}')
-		st.metric(label=f"Semana {semana_atual-1}", value=metrica4, delta=delta4)
-	try:
-	# Exibir o mapa no Streamlit usando st.components.v1.html()
-
-		with st.expander("🔎 Veja a tabela de dados aqui "):
-			st.write(df)
-	except:
-		st.write("Sem dados para exibir. Por favor, selecione pelo menos uma provincia")
+		with col1:
+			# Defina suas métricas
+			df['data'] = df['today'].dt.date
+			if prov:
+				metrica1 = str(df["data"].max())
+				delta1="+++"
+			# Obter a data e hora atual
+			hoje_hora = datetime.now()
+			# Extrair o mês atual
+			ano_atual = hoje_hora.year
+			mes_atual = hoje_hora.month
+			nome_mes = hoje_hora.strftime('%B')
+			semana_atual = hoje_hora.isocalendar()[1]
+			metrica2 = len(df)
+			delta2=len(df[(df["ano"]==ano_atual) & (df["mes"]==mes_atual) ])-len(
+				df[(df["ano"]==ano_atual-1) & (df["mes"]==mes_atual) ])
+	
+	
+			
+			metrica3 = len(df[(df["ano"]==ano_atual) & (df["mes"]==mes_atual-1) ])
+			delta3=len(df[(df["ano"]==ano_atual) & (df["mes"]==mes_atual-1) ])-len(
+				df[(df["ano"]==ano_atual-1) & (df["mes"]==mes_atual-1) ])
+			metrica4 = len(df[(df["ano"]==ano_atual) & (df["week"]==semana_atual-1) ])
+			delta4=len(df[(df["ano"]==ano_atual) & (df["week"]==semana_atual-1) ])-len(
+			df[(df["ano"]==ano_atual-1) & (df["week"]==semana_atual-1) ])
+	
+			# Layout do aplicativo
+			#st.title('KPI Dashboard')
+		
+			# KPI 1
+			st.subheader('Actualização 📆')
+			if prov:
+				st.metric(label="Data de envio do último formulario", value=metrica1, delta=delta1)
+	
+		with col2:	
+			# KPI 2
+			st.subheader('Total ISS 🎨')
+			st.metric(label="Total formulários selecionados", value=metrica2, delta=delta2)
+	
+		with col3:
+			# KPI 3
+			st.subheader('⏳Total Mês passado')
+			st.metric(label=f"Mês {mes_atual-1}", value=metrica3, delta=delta3)
+	
+		with col4:
+			# KPI 4
+			st.subheader(f'⌛Total Semana {semana_atual-1}')
+			st.metric(label=f"Semana {semana_atual-1}", value=metrica4, delta=delta4)
+	st.write("...")
+	with st.conteiner:
+		try:
+		# Exibir o mapa no Streamlit usando st.components.v1.html()
+	
+			with st.expander("🔎 Veja a tabela de dados aqui "):
+				st.write(df)
+		except:
+			st.write("Sem dados para exibir. Por favor, selecione pelo menos uma provincia")
 
 
 with tab2:
