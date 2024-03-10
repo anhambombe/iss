@@ -207,6 +207,7 @@ with tab3:
 		longitude_mean = bd.geometry.centroid.x.mean()
 		# Criar o mapa Folium
 		m = folium.Map(location=[latitude_mean, longitude_mean], zoom_start=5)
+		folium.LayerControl().add_to(m)
 		
 		# Adicionar os dados do shapefile ao mapa Folium
 		folium.GeoJson(
@@ -219,7 +220,7 @@ with tab3:
 		        'fillOpacity': 0.01
 		    }
 		).add_to(m)
-		folium.LayerControl().add_to(m)
+
 		######################### shp ##################################
 
 		
