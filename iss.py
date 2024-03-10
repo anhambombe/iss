@@ -219,34 +219,38 @@ with tab3:
 		        'fillOpacity': 0.01
 		    }
 		).add_to(m)
+		folium.LayerControl().add_to(m)
 		######################### shp ##################################
-		popup = folium.GeoJsonPopup(
-			    fields=[df["states"], df["districts"]],
-			    aliases=["Prov.", "Distr."],
-			    localize=True,
-			    labels=True,
-			    style="background-color: yellow;",
-			)
-			
-		tooltip = folium.GeoJsonTooltip(
-			    fields=[df["states"], df["districts"], df["week"]],
-			    aliases=["Prov.:", "Distr:", "Semana:"],
-			    localize=True,
-			    sticky=False,
-			    labels=True,
-			    style="""
-			        background-color: #F0EFEF;
-			        border: 2px solid black;
-			        border-radius: 3px;
-			        box-shadow: 3px;
-			    """,
-			    max_width=800,
-			)
+
 		
 		latitude_mean=df['_gps_beginning_latitude'].mean()
 		longitude_mean=df['_gps_beginning_longitude'].mean()
 		#m = folium.Map(location=[latitude_mean, longitude_mean], zoom_start=5)
 		for index, row in df[df["ano"]==2024].iterrows():
+
+			popup = folium.GeoJsonPopup(
+				    fields=[df["states"], df["districts"]],
+				    aliases=["Prov.", "Distr."],
+				    localize=True,
+				    labels=True,
+				    style="background-color: yellow;",
+				)
+				
+			tooltip = folium.GeoJsonTooltip(
+				    fields=[df["states"], df["districts"], df["week"]],
+				    aliases=["Prov.:", "Distr:", "Semana:"],
+				    localize=True,
+				    sticky=False,
+				    labels=True,
+				    style="""
+				        background-color: #F0EFEF;
+				        border: 2px solid black;
+				        border-radius: 3px;
+				        box-shadow: 3px;
+				    """,
+				    max_width=800,
+				)
+			
 		        folium.CircleMarker(
 		        location=[row['_gps_beginning_latitude'], row['_gps_beginning_longitude']],
 		        radius=3,
@@ -258,7 +262,7 @@ with tab3:
 			popup=popup,
 			tooltip="click me..." #tooltip
 		    ).add_to(m)
-		folium.LayerControl().add_to(m)
+
 		st.components.v1.html(m._repr_html_(), width=1500, height=800, scrolling=True)
 	except:
 		st.write("Sem dados para exibir. Por favor, selecione pelo menos uma provincia")
