@@ -229,7 +229,7 @@ with tab3:
 			)
 			
 		tooltip = folium.GeoJsonTooltip(
-			    fields=["states", "districts", "week"],
+			    fields=[df["states"], df["districts"], df["week"]],
 			    aliases=["Prov.:", "Distr:", "Semana:"],
 			    localize=True,
 			    sticky=False,
