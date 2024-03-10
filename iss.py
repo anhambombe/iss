@@ -226,31 +226,23 @@ with tab3:
 		latitude_mean=df['_gps_beginning_latitude'].mean()
 		longitude_mean=df['_gps_beginning_longitude'].mean()
 		#m = folium.Map(location=[latitude_mean, longitude_mean], zoom_start=5)
-		for index, row in df[df["ano"]==2024].iterrows():
+		for index, row in df.iterrows():
 
-			popup = folium.GeoJsonPopup(
-				    fields=[df["states"], df["districts"]],
-				    aliases=["Prov.", "Distr."],
-				    localize=True,
-				    labels=True,
-				    style="background-color: yellow;",
-				)
+		    popup_content = f"<b>Designaçao:</b> {row['desiganation']}<br>" \
+		                    f"<b>Nome:</b> {row['nome']}<br>" \
+		                    f"<b>Provincia:</b> {row['states']}<br>" \
+		                    f"<b>Distrito:</b> {row['districts']}<br>" \
+		                    f"<b>Unidade Sanitária:</b> {row['name_of_facility_visited']}<br>" \
+		                    f"<b>Semana:</b> {row['week']}"
 				
-			tooltip = folium.GeoJsonTooltip(
-				    fields=[df["states"], df["districts"], df["week"]],
-				    aliases=["Prov.:", "Distr:", "Semana:"],
-				    localize=True,
-				    sticky=False,
-				    labels=True,
-				    style="""
-					background-color: #F0EFEF;
-					border: 2px solid black;
-					border-radius: 3px;
-					box-shadow: 3px;
-				    """,
-				    max_width=800,
-				)
 			
+		    tooltip_content = f"<b>Designaçao:</b> {row['desiganation']}<br>" \
+		                    f"<b>Nome:</b> {row['nome']}<br>" \
+		                    f"<b>Provincia:</b> {row['states']}<br>" \
+		                    f"<b>Distrito:</b> {row['districts']}<br>" \
+		                    f"<b>Unidade Sanitária:</b> {row['name_of_facility_visited']}<br>" \
+		                    f"<b>Semana:</b> {row['week']}"
+										
 			folium.CircleMarker(
 			location=[row['_gps_beginning_latitude'], row['_gps_beginning_longitude']],
 			radius=3,
@@ -259,11 +251,11 @@ with tab3:
 			fill_color="red",
 			fill_opacity=1,
 			#popup=row['districts'] 
-			popup=popup,
-			tooltip="click me..." #tooltip
+			popup=popup_content,
+			tooltip=tooltip_content
 			).add_to(m)
 
-		st.components.v1.html(m._repr_html_(), width=1200, height=550, scrolling=True)
+		st.components.v1.html(m._repr_html_(), width=1200, height=500, scrolling=True)
 	except:
 		st.write("Sem dados para exibir. Por favor, selecione pelo menos uma provincia")
 
