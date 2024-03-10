@@ -91,25 +91,7 @@ df=load_data()
 bd=load_shp()
 
 
-#######################################################
-# Calcular o centroide do shapefile
-latitude_mean = bd.geometry.centroid.y.mean()
-longitude_mean = bd.geometry.centroid.x.mean()
-# Criar o mapa Folium
-m = folium.Map(location=[latitude_mean, longitude_mean], zoom_start=5)
 
-# Adicionar os dados do shapefile ao mapa Folium
-folium.GeoJson(
-    bd,
-    name='Distritos',
-    style_function=lambda feature: {
-        'fillColor': 'white',
-        'color': 'black',
-        'weight': 1,
-        'fillOpacity': 0.01
-    }
-).add_to(m)
-###########################################################
 with st.container():
 	# Configuração da aplicação Streamlit
 	st.title("Repositorio de dados de ISS")
@@ -218,6 +200,25 @@ with tab3:
 	# Escreve o DataFrame na tela
 	#st.write(resumo)
 	try:
+	################### shpe ####################################
+		# Calcular o centroide do shapefile
+		latitude_mean = bd.geometry.centroid.y.mean()
+		longitude_mean = bd.geometry.centroid.x.mean()
+		# Criar o mapa Folium
+		m = folium.Map(location=[latitude_mean, longitude_mean], zoom_start=5)
+		
+		# Adicionar os dados do shapefile ao mapa Folium
+		folium.GeoJson(
+		    bd,
+		    name='Distritos',
+		    style_function=lambda feature: {
+		        'fillColor': 'white',
+		        'color': 'black',
+		        'weight': 1,
+		        'fillOpacity': 0.01
+		    }
+		).add_to(m)
+		######################### shp ##################################
 		
 		latitude_mean=df['_gps_beginning_latitude'].mean()
 		longitude_mean=df['_gps_beginning_longitude'].mean()
