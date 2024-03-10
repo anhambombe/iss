@@ -86,7 +86,8 @@ def load_shp():
 	# Calcular o centroide do shapefile
 	latitude_mean = shp.geometry.centroid.y.mean()
 	longitude_mean = shp.geometry.centroid.x.mean()
-	
+	# Criar o mapa Folium
+	m = folium.Map(location=[latitude_mean, longitude_mean], zoom_start=5)
 	return shp
 
     #print (df)
@@ -95,8 +96,7 @@ bd=load_shp()
 
 
 #######################################################
-# Criar o mapa Folium
-m = folium.Map(location=[latitude_mean, longitude_mean], zoom_start=5)
+
 
 # Adicionar os dados do shapefile ao mapa Folium
 folium.GeoJson(
