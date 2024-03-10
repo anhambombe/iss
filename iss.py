@@ -220,6 +220,28 @@ with tab3:
 		    }
 		).add_to(m)
 		######################### shp ##################################
+		popup = folium.GeoJsonPopup(
+			    fields=["Provincia", "Distritos"],
+			    aliases=["Prov.", "Distr."],
+			    localize=True,
+			    labels=True,
+			    style="background-color: yellow;",
+			)
+			
+		tooltip = folium.GeoJsonTooltip(
+			    fields=["Provincia", "Distritos", "week"],
+			    aliases=["Prov.:", "Distr:", "Semana:"],
+			    localize=True,
+			    sticky=False,
+			    labels=True,
+			    style="""
+			        background-color: #F0EFEF;
+			        border: 2px solid black;
+			        border-radius: 3px;
+			        box-shadow: 3px;
+			    """,
+			    max_width=800,
+			)
 		
 		latitude_mean=df['_gps_beginning_latitude'].mean()
 		longitude_mean=df['_gps_beginning_longitude'].mean()
@@ -232,7 +254,9 @@ with tab3:
 		        fill=True,
 		        fill_color="red",
 		        fill_opacity=1,
-		        popup=row['districts'] 
+		        #popup=row['districts'] 
+			popup=popup,
+			tooltip=tooltip
 		    ).add_to(m)
 		st.components.v1.html(m._repr_html_(), width=800, height=600, scrolling=True)
 	except:
