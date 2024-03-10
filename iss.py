@@ -200,7 +200,7 @@ with tab3:
 	#$$$$$$$$$$$$$$$$$
 	# Escreve o DataFrame na tela
 	#st.write(resumo)
-	try:
+	if prov:
 	################### shpe ####################################
 		# Calcular o centroide do shapefile
 		latitude_mean = bd.geometry.centroid.y.mean()
@@ -256,7 +256,7 @@ with tab3:
 			).add_to(m)
 
 		st.components.v1.html(m._repr_html_(), width=1200, height=500, scrolling=True)
-	except:
+	else:
 		st.write("Sem dados para exibir. Por favor, selecione pelo menos uma provincia")
 
 
