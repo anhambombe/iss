@@ -9,9 +9,9 @@ from datetime import datetime
 import geopandas as gpd
 #from pandasai import SmartDataframe
 #from pandasai import PandasAI
-from pandasai import PandasAI
+#from pandasai import PandasAI
 
-from pandasai.llm.openai import OpenAI
+#from pandasai.llm.openai import OpenAI
 import time
 import yaml
 
@@ -274,19 +274,20 @@ with tab3:
 		st.write("Sem dados para exibir. Por favor, selecione pelo menos uma provincia")
 
 with tab4:
-	def chat(df,prompt):
-		llm = OpenAI(api_token = st.secrets["openai_api_token"])
-		pandas_ai=PandasAI(llm)
-		result=pandas_ai.run(dbf, prompt=prompt, show_code=True, is_conversational_answer=True)
-		return result
+	st.write("Em desenvolvimento, até breve!")
+	#def chat(df,prompt):
+		#llm = OpenAI(api_token = st.secrets["openai_api_token"])
+		#pandas_ai=PandasAI(llm)
+		#result=pandas_ai.run(dbf, prompt=prompt, show_code=True, is_conversational_answer=True)
+		#return result
 
-	input_text = st.text_area("Place your questions in the text box below")
+	#input_text = st.text_area("Place your questions in the text box below")
 	
-	if input_text:
-		if st.button("Send"):
-			st.info(f"You: {input_text}",icon="👨")
-			result=chat(df,input_text)
-			st.success(f"Bot: {result}",icon="🤖")
+	#if input_text:
+		#if st.button("Send"):
+			#st.info(f"You: {input_text}",icon="👨")
+			#result=chat(df,input_text)
+			#st.success(f"Bot: {result}",icon="🤖")
 
 
 st.info("Produzido pelo GPEI Moçambique")
