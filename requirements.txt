@@ -6,4 +6,4 @@ openpyxl
 requests
 geopandas
 pandasai
-yaml
+#yaml
