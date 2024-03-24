@@ -249,7 +249,7 @@ with tab3:
 		latitude_mean = shpp.geometry.centroid.y.mean()
 		longitude_mean = shpp.geometry.centroid.x.mean()
 		# Criar o mapa Folium
-		m = folium.Map(location=[latitude_mean, longitude_mean], zoom_start=5)
+		#m = folium.Map(location=[latitude_mean, longitude_mean], zoom_start=5)
 		
 		
 		# Adicionar os dados do shapefile ao mapa Folium
