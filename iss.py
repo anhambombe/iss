@@ -273,10 +273,15 @@ with tab3:
 		# Coordenadas para o centro do mapa
 		lat = -19.04318
 		long = 34.195
+		mziss["priority_level"] = np.where(mziss["priority_level"] == "Hi", "Higher", mziss["priority_level"])
+		mziss["priority_level"] = np.where(mziss["priority_level"] == "M", "Medium", mziss["priority_level"])
+		mziss["priority_level"] = np.where(mziss["priority_level"] == "L", "Low", mziss["priority_level"])
+		mziss["priority_level"] = np.where(mziss["priority_level"] == "H", "High", mziss["priority_level"])
 		colors = {
     			'Medium': 'yellow',  # Amarelo
    		 	'Low': 'red',     # Vermelho
    		 	'High': 'green',   # Verde
+			'Higher': 'green'   # Verde
 			}
 
 		
