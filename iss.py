@@ -310,7 +310,7 @@ with tab3:
 			#popup=row['districts'] 
 			popup=popup_content,
 			tooltip=tooltip_content,name="ISS"
-			)#.add_to(m)
+			))#.add_to(m)
 		# Adicione a camada do dot map ao mapa
 		m.add_child(dot_map)
 		folium.LayerControl(position = 'topleft', collapsed= True, autoZIndex = True,
