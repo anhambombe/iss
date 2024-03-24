@@ -228,6 +228,9 @@ with tab3:
 		longitude_mean = bd.geometry.centroid.x.mean()
 		# Criar o mapa Folium
 		m = folium.Map(location=[latitude_mean, longitude_mean], zoom_start=5)
+		folium.TileLayer(tiles="cartodb positron", name="cartodb positron").add_to(m)
+		folium.TileLayer(tiles="cartodb voyager", name="cartodb voyager").add_to(m)
+		folium.TileLayer(tiles="NASAGIBS Blue Marble", name="NASAGIBS Blue Marble").add_to(m)
 		
 		
 		# Adicionar os dados do shapefile ao mapa Folium
@@ -265,9 +268,16 @@ with tab3:
 		).add_to(m)
 
 		######################### shp ##################################
+		# Adicione marcadores de pontos (dot map) coloridos com base na variável "sexo"
+		dot_map = folium.FeatureGroup(name="Dot Map")  # Crie uma camada de sobreposição para o dot map
 		# Coordenadas para o centro do mapa
 		lat = -19.04318
 		long = 34.195
+		colors = {
+    			'Medium': 'yellow',  # Amarelo
+   		 	'Low': 'red',     # Vermelho
+   		 	'High': 'green',   # Verde
+			}
 
 		
 		latitude_mean=df['_gps_beginning_latitude'].mean()
@@ -290,19 +300,22 @@ with tab3:
 		                    f"<b>Unidade Sanitária:</b> {row['name_of_facility_visited']}<br>" \
 		                    f"<b>Semana:</b> {row['week']}"
 										
-			folium.CircleMarker(
+			dot_map.add_child(folium.CircleMarker(
 			location=[row['_gps_beginning_latitude'], row['_gps_beginning_longitude']],
 			radius=3,
-			color="red",
+			color=None,
 			fill=True,
-			fill_color="red",
+			fill_color=colors[row['priority_level']],
 			fill_opacity=1,
 			#popup=row['districts'] 
 			popup=popup_content,
-			tooltip=tooltip_content
-			).add_to(m)
+			tooltip=tooltip_content,name="ISS"
+			)#.add_to(m)
+		# Adicione a camada do dot map ao mapa
+		m.add_child(dot_map)
 		folium.LayerControl(position = 'topleft', collapsed= True, autoZIndex = True,
                     draggable= True).add_to(m)
+		#map1.add_to(m1)
 
 		st.components.v1.html(m._repr_html_(), width=1200, height=500, scrolling=True)
 	else:
