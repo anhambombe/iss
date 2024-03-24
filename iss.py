@@ -94,9 +94,21 @@ def load_shp():
 
 	return shp
 
+@st.cache_data
+def load_shpp():
+	shpp = gpd.read_file("Provincias2.json")
+	#https://github.com/anhambombe/iss/blob/main/Provincias2.json
+	#https://raw.githubusercontent.com/anhambombe/iss/main/Distritos_161_j.json
+
+	# Definir o CRS do GeoDataFrame
+	shpp.crs = "EPSG:4201"
+
+	return shpp
+
     #print (df)
 df=load_data()
 bd=load_shp()
+shpp=load_shpp()
 
 
 
@@ -119,6 +131,7 @@ anos=st.sidebar.multiselect(
 
 df=df.loc[(df["states"].isin(prov)) & (df["ano"].isin(anos))]
 bd=bd.loc[bd["Provincia"].isin(prov)]
+shpp=shpp.loc[shpp["Provincia"].isin(prov)]
 
 with tab1:
 	with st.container():
@@ -221,6 +234,28 @@ with tab3:
 		folium.GeoJson(
 		    bd,
 		    name='Distritos',
+		    style_function=lambda feature: {
+		        'fillColor': 'white',
+		        'color': 'black',
+		        'weight': 1,
+		        'fillOpacity': 0.01
+		    }
+		).add_to(m)
+
+		######################### shp ##################################
+
+			################### shpp ####################################
+		# Calcular o centroide do shapefile
+		latitude_mean = shpp.geometry.centroid.y.mean()
+		longitude_mean = shpp.geometry.centroid.x.mean()
+		# Criar o mapa Folium
+		m = folium.Map(location=[latitude_mean, longitude_mean], zoom_start=5)
+		
+		
+		# Adicionar os dados do shapefile ao mapa Folium
+		folium.GeoJson(
+		    shpp,
+		    name='Provincias',
 		    style_function=lambda feature: {
 		        'fillColor': 'white',
 		        'color': 'black',
