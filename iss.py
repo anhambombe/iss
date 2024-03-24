@@ -188,11 +188,11 @@ with tab2:
 
 		chart_prov = df["states"].value_counts()
 
-		st.bar_chart(chart_prov)
+		st.bar_chart(chart_prov, labels={'index': 'Estado', 'value': 'Quantidade'})
 
 		# Cria um DataFrame com a contagem de valores únicos na coluna "Vacinado"
 		chart_distr = df["districts"].value_counts()
-		st.bar_chart(chart_distr)
+		st.bar_chart(chart_distr, labels={'index': 'Distrito', 'value': 'Quantidade'})
 
 		# Renomeia a coluna para "Total"
 		#resumo.columns = ["Total"]
@@ -275,6 +275,7 @@ with tab3:
 
 with tab4:
 	st.write("Em desenvolvimento, até breve!")
+	#dt=pd.read_excel("https://docs.google.com/spreadsheets/d/1q9T-43I0xIU9detDR8tOzmMPQMfx2jKj/edit?usp=sharing&ouid=117668420173752402784&rtpof=true&sd=true)
 	#def chat(df,prompt):
 		#llm = OpenAI(api_token = st.secrets["openai_api_token"])
 		#pandas_ai=PandasAI(llm)
