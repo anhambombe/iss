@@ -106,7 +106,7 @@ with st.container():
 with st.container():
 	st.write("---")
 	
-	tab1, tab2, tab3, tab4 = st.tabs(["📈 Listagem", "📊 Grafico","🌍 Mapa 🗺","🤖 IA"])
+	tab1, tab2, tab3, tab4 = st.tabs(["📋 Listagem", "📊 Grafico","🌍 Mapa 🗺","🤖 IA"])
 	#tab1.subheader("Tables")
 
 prov=st.sidebar.multiselect(
@@ -191,8 +191,8 @@ with tab2:
 		st.bar_chart(chart_prov)
 
 		# Cria um DataFrame com a contagem de valores únicos na coluna "Vacinado"
-		chart_ano = df["ano"].value_counts()
-		#st.line_chart(chart_ano)
+		chart_distr = df["districts"].value_counts()
+		st.bar_chart(chart_distr)
 
 		# Renomeia a coluna para "Total"
 		#resumo.columns = ["Total"]
