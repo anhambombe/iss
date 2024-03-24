@@ -8,7 +8,9 @@ import requests
 from datetime import datetime
 import geopandas as gpd
 #from pandasai import SmartDataframe
+#from pandasai import PandasAI
 from pandasai import PandasAI
+
 from pandasai.llm.openai import OpenAI
 import time
 import yaml
