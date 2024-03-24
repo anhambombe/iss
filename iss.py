@@ -222,11 +222,14 @@ with tab3:
 		).add_to(m)
 
 		######################### shp ##################################
+		# Coordenadas para o centro do mapa
+		lat = -19.04318
+		long = 34.195
 
 		
 		latitude_mean=df['_gps_beginning_latitude'].mean()
 		longitude_mean=df['_gps_beginning_longitude'].mean()
-		#m = folium.Map(location=[latitude_mean, longitude_mean], zoom_start=5)
+		#m = folium.Map(location=[lat, long], zoom_start=5)
 		for index, row in df.iterrows():
 
 			popup_content = f"<b>Designaçao:</b> {row['designation']}<br>" \
