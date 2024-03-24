@@ -273,6 +273,7 @@ with tab3:
 		# Coordenadas para o centro do mapa
 		lat = -19.04318
 		long = 34.195
+		df["priority_level"] = df["priority_level"].dropna()
 		df["priority_level"] = np.where(df["priority_level"] == "Hi", "Higher", df["priority_level"])
 		df["priority_level"] = np.where(df["priority_level"] == "M", "Medium", df["priority_level"])
 		df["priority_level"] = np.where(df["priority_level"] == "L", "Low", df["priority_level"])
