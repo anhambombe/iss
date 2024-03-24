@@ -11,6 +11,8 @@ import geopandas as gpd
 from pandasai import PandasAI
 from pandasai.llm.openai import OpenAI
 import time
+import yaml
+
 
 
 st.set_page_config(
