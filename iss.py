@@ -7,6 +7,9 @@ import openpyxl
 import requests
 from datetime import datetime
 import geopandas as gpd
+from pandasai import SmartDataframe
+from pandasai.llm import OpenAI
+import time
 
 
 st.set_page_config(
@@ -98,7 +101,7 @@ with st.container():
 with st.container():
 	st.write("---")
 	
-	tab1, tab2, tab3 = st.tabs(["📈 Listagem", "📊 Grafico","🌍 Mapa 🗺"])
+	tab1, tab2, tab3, tab4 = st.tabs(["📈 Listagem", "📊 Grafico","🌍 Mapa 🗺","🤖 IA"])
 	#tab1.subheader("Tables")
 
 prov=st.sidebar.multiselect(
@@ -258,12 +261,37 @@ with tab3:
 			popup=popup_content,
 			tooltip=tooltip_content
 			).add_to(m)
-		folium.LayerControl().add_to(m)
+		folium.LayerControl(position = 'topleft', collapsed= True, autoZIndex = True,
+                    draggable= True).add_to(m)
 
 		st.components.v1.html(m._repr_html_(), width=1200, height=500, scrolling=True)
 	else:
 		st.write("Sem dados para exibir. Por favor, selecione pelo menos uma provincia")
 
+with tab4:
+	llm = OpenAI(api_token = st.secrets["openai_api_token"])
+
+	query = st.text_area("Place your questions in the text box below")
+	st.button("Send")
+	if query:
+		#st.button("Send")
+		if st.button:
+	
+		    # Display loading indicator
+		    progress_bar = st.progress(0)
+		    for percent_complete in range(100):
+		        time.sleep(0.01)  # Simulate some processing time
+		        progress_bar.progress(percent_complete + 1)
+	
+		    # Hide loading indicator and show result
+		    progress_bar.empty()
+		    st.write("Processing complete!")
+	
+		    # Process query
+		    dbf = SmartDataframe(df, config={"llm": llm})
+		    answer = dbf.chat(query)
+		    st.info(f"You: {query}",icon="👨")
+		    st.success(f"Bot: {answer}",icon="🤖")
 
 
 st.info("Produzido pelo GPEI Moçambique")
