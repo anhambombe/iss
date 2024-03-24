@@ -188,11 +188,11 @@ with tab2:
 
 		chart_prov = df["states"].value_counts()
 
-		st.bar_chart(chart_prov, labels={'index': 'Estado', 'value': 'Quantidade'})
+		st.bar_chart(chart_prov)#, labels={'index': 'Estado', 'value': 'Quantidade'}
 
 		# Cria um DataFrame com a contagem de valores únicos na coluna "Vacinado"
 		chart_distr = df["districts"].value_counts()
-		st.bar_chart(chart_distr, labels={'index': 'Distrito', 'value': 'Quantidade'})
+		st.bar_chart(chart_distr)#, labels={'index': 'Distrito', 'value': 'Quantidade'}
 
 		# Renomeia a coluna para "Total"
 		#resumo.columns = ["Total"]
