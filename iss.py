@@ -127,7 +127,7 @@ prov=st.sidebar.multiselect(
 
 anos=st.sidebar.multiselect(
     "Ano",
-    df["ano"].unique(),df["ano"].unique()[-1,-2])
+    df["ano"].unique(),df["ano"].unique()[-2,-1])
 
 df=df.loc[(df["states"].isin(prov)) & (df["ano"].isin(anos))]
 bd=bd.loc[bd["Provincia"].isin(prov)]
@@ -179,12 +179,12 @@ with tab1:
 	
 		with col3:
 			# KPI 3
-			st.subheader('⏳Total Mês passado')
+			st.subheader('🎟Total Mês passado')
 			st.metric(label=f"Mês {mes_atual-1}", value=metrica3, delta=delta3)
 	
 		with col4:
 			# KPI 4
-			st.subheader(f'⌛Total Semana {semana_atual-1}')
+			st.subheader(f'🎫Total Semana {semana_atual-1}')
 			st.metric(label=f"Semana {semana_atual-1}", value=metrica4, delta=delta4)
 	st.write("---")
 	with st.container():
@@ -238,9 +238,9 @@ with tab3:
 		                 attr="layer1", name="Floresta").add_to(m)
 		folium.TileLayer("https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png",
 		                 attr="layer1", name="Terreno").add_to(m)
-		folium.TileLayer("https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
-		                 attr="layer1", name="Floresta").add_to(m)
-		folium.LayerControl(draggable=True).add_to(m)
+		#folium.TileLayer("https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
+		                 #attr="layer1", name="Floresta").add_to(m)
+		
 		
 		
 		# Adicionar os dados do shapefile ao mapa Folium
@@ -252,12 +252,12 @@ with tab3:
 		        'color': 'black',
 		        'weight': 1,
 		        'fillOpacity': 0.01
-		    }
+		    },tooltip=folium.features.GeoJsonTooltip(fields=['Provincia', 'Distrito'], 
+			localize=True)
 		).add_to(m)
-
-		######################### shp ##################################
-
-			################### shpp ####################################
+		folium.LayerControl(draggable=True).add_to(m)
+		######################### fim shp ##################################
+		################### shpp ####################################
 		# Calcular o centroide do shapefile
 		latitude_mean = shpp.geometry.centroid.y.mean()
 		longitude_mean = shpp.geometry.centroid.x.mean()
