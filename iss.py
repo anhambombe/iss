@@ -127,7 +127,7 @@ prov=st.sidebar.multiselect(
 
 anos=st.sidebar.multiselect(
     "Ano",
-    df["ano"].unique(),df["ano"].unique()[-2,-1])
+    df["ano"].unique(),df["ano"].unique()[[-2,-1]])
 
 df=df.loc[(df["states"].isin(prov)) & (df["ano"].isin(anos))]
 bd=bd.loc[bd["Provincia"].isin(prov)]
