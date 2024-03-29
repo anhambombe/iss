@@ -227,10 +227,19 @@ with tab3:
 		latitude_mean = bd.geometry.centroid.y.mean()
 		longitude_mean = bd.geometry.centroid.x.mean()
 		# Criar o mapa Folium
-		m = folium.Map(location=[latitude_mean, longitude_mean], zoom_start=5)
+		m = folium.Map(location=[latitude_mean, longitude_mean], zoom_start=5,tiles=None)
+		folium.TileLayer("OpenStreetMap",attr="layer1", name="Ruas").add_to(m)
 		folium.TileLayer(tiles="cartodb positron", name="cartodb positron").add_to(m)
 		folium.TileLayer(tiles="cartodb voyager", name="cartodb voyager").add_to(m)
 		folium.TileLayer(tiles="NASAGIBS Blue Marble", name="NASAGIBS Blue Marble").add_to(m)
+
+		folium.TileLayer("https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
+		                 attr="layer1", name="Floresta").add_to(m)
+		folium.TileLayer("https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png",
+		                 attr="layer1", name="Terreno").add_to(m)
+		folium.TileLayer("https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
+		                 attr="layer1", name="Floresta").add_to(m)
+		folium.LayerControl(draggable=True).add_to(m)
 		
 		
 		# Adicionar os dados do shapefile ao mapa Folium
