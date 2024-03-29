@@ -127,7 +127,7 @@ prov=st.sidebar.multiselect(
 
 anos=st.sidebar.multiselect(
     "Ano",
-    df["ano"].unique(),df["ano"].unique()[-1])
+    df["ano"].unique(),df["ano"].unique()[-1,-2])
 
 df=df.loc[(df["states"].isin(prov)) & (df["ano"].isin(anos))]
 bd=bd.loc[bd["Provincia"].isin(prov)]
@@ -150,6 +150,7 @@ with tab1:
 			mes_atual = hoje_hora.month
 			nome_mes = hoje_hora.strftime('%B')
 			semana_atual = hoje_hora.isocalendar()[1]
+			
 			metrica2 = len(df)
 			delta2=len(df[(df["ano"]==ano_atual) & (df["mes"]==mes_atual) ])-len(
 				df[(df["ano"]==ano_atual-1) & (df["mes"]==mes_atual) ])
