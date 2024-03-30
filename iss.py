@@ -14,7 +14,7 @@ import geopandas as gpd
 #from pandasai.llm.openai import OpenAI
 import time
 import yaml
-
+import random
 
 
 st.set_page_config(
