@@ -123,12 +123,12 @@ with st.container():
 
 prov=st.sidebar.multiselect(
     "Provincia",
-    df["states"].unique(),df["states"].unique()[0]
+    df["states"].unique(),random.choices(df["states"].unique())
 )
 
 anos=st.sidebar.multiselect(
     "Ano",
-    df["ano"].unique(),df["ano"].unique()
+    df["ano"].unique(),df["ano"].unique()[[-2,-1]]
 )
 
 df=df.loc[(df["states"].isin(prov)) & (df["ano"].isin(anos))]
@@ -257,7 +257,7 @@ with tab3:
 		    },tooltip=folium.features.GeoJsonTooltip(fields=['Provincia', 'Distrito'], 
 			localize=True)
 		).add_to(m)
-		folium.LayerControl(draggable=True).add_to(m)
+		#folium.LayerControl(draggable=True).add_to(m)
 		######################### fim shp ##################################
 		################### shpp ####################################
 		# Calcular o centroide do shapefile
@@ -281,7 +281,7 @@ with tab3:
 
 		######################### shp ##################################
 		# Adicione marcadores de pontos (dot map) coloridos com base na variável "sexo"
-		dot_map = folium.FeatureGroup(name="Dot Map")  # Crie uma camada de sobreposição para o dot map
+		dot_map = folium.FeatureGroup(name="ISS")  # Crie uma camada de sobreposição para o dot map
 		# Coordenadas para o centro do mapa
 		lat = -19.04318
 		long = 34.195
@@ -335,7 +335,7 @@ with tab3:
                     draggable= True).add_to(m)
 		#map1.add_to(m1)
 
-		st.components.v1.html(m._repr_html_(), width=1200, height=500, scrolling=True)
+		st.components.v1.html(m._repr_html_(), width=1000, height=500, scrolling=True)
 	else:
 		st.write("Sem dados para exibir. Por favor, selecione pelo menos uma provincia")
 
