@@ -123,7 +123,7 @@ with st.container():
 
 prov=st.sidebar.multiselect(
     "Provincia",
-    df["states"].unique(),random.choices(df["states"].unique())
+    df["states"].unique(),df["states"].unique()[-1]
 )
 
 anos=st.sidebar.multiselect(
